@@ -1,0 +1,89 @@
+The complete ASP.NET MVC 5 course
+
+We are introduced to the:
+Model
+View
+Controller
+(and Router - which allocates the correct URL request to the proper
+	controller to handle. Ex: http://yourwebsite.com/movies -> allocates the request
+	to the moviesController to handle it)
+
+Tools for visual studio to aid in website development:
+	Productivity Power Tools 2017
+	Web Essentials 2017
+	- (optional but recommended) ReSharper
+
+//////////////////////////////////////////////////
+Development:
+
+When you first open a new project, there are a number of files that we can explore
+The first one for relevance resides in the App_Start folder
+	Within this folder, a file called RouteConfig resides
+		Essentially, this is where the URL path is tokenized to determine 
+		where the user is supposed to go, as well as what controller is to be used
+		and what method within the controller is to be called -> i.e movies/popular
+		will call the moviesController and then within that controller, the Popular()
+		method will then be called to grab whatever it can from the movie Model and display
+		it to the View
+			Another example of this is movies/edit/1
+			movieController -> Edit(int id)*
+				*typically the id portion is an optional parameter as dictated within
+				the default action
+
+Content folder contains the CSS or client-side assets (images, music, etc)
+Controllers, has the controllers :)
+The font folder which should be moved unter the Content folder
+Models for the domain classes
+Scripts for JS files
+Views, contains folders named after controllers of the application and Shared that contains views
+	that can be used accross the controller
+favicon.ico is the icon displayed  in the browser
+Global.asax, always in an ASP.NET file, called when the application starts dictates the Routes to use and
+	other notables
+packages.config, used by NuGet package manager and dependancies and libraries. Ex: install-package <name>
+Web.config -> contains all the nitty gritty, sections that should be modified are connectionStrings (for 
+	databases. and appSettings where we can define the configurations settings for the application
+
+///////////////////////////////////////////////////////////////
+Creating a Model/Controller/View/Route:
+
+Right click on the Model folder and add a new Class
+	this will automatically generate a new C# model to which we can now add the business logic and
+	properties needed to define it.
+
+Next with the sufficient fields involved, we can now add a Controller
+	We do this by right-clicking the Controller folder and Selecting Controller
+	 we are then presented with common scaffold files that come with the typical calls needed 
+		the exercise determined that (empty would suffice). 
+			Within this controller, we can set the ActionResult to whatever url extention (action)
+			that we intend to use the model for. Make sure to include the model up where the 
+			dependancies are situated, I.e "using <ProjectName>.Models"
+Note: When you generate a model, the View of the same name is also created here
+	since we've described what the view would be called via the method outlined in the controller.
+	we can set the view to that particular name within the model. (i.e controller Random() -> Random.cshtml)
+		(making the view partial will enable the view to use the Shared page templates)
+you can now pass the model that you've generated inside the controller to the view. (<name>Controller ->Random()->return View(<name>);
+
+Go back to the view for that action and link the model at the top of the page with @model <projectName.Models.modelused)
+	now you can call on the model's particular logic to be generated on the page.
+
+	Now you can run the application from this view using Ctrl + F5 to see it in action!
+
+		This is pretty much it for the fundamentals of MVC5
+///////////////////////////////////////////////////////////////////////////////////
+
+
+Changing the Template of our application, our application currently uses a Bootstrap template so to get a new one
+	for the front-end CSS framework
+		goto: bootswatch.com -> menu -> themes (select) -> menu -> select the theme -> bootstrap.css 
+			next, goto your content folder and create a new css file for that particular theme (i.e
+			bootstrap-<theme>.css)
+				Move this file under the Content folder of your Application
+				At this point, we need to change the reference from the bootstrap.css that is
+					currently called with that of bootstrap-lumne.css
+					Todo this: Goto: App_Start -> BundleConfig.cs->rename
+								the current bootstrap.css to bootstrap-lumen.css
+									-> recompile (rebuild) the project then after
+Aside: BundleConfig.cs is a great way to bundle various js and css together. This helps reduce the number of http
+	requests that your app may use and therefore, a faster page load.
+
