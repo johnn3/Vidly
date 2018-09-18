@@ -32,15 +32,15 @@ The first one for relevance resides in the App_Start folder
 
 Content folder contains the CSS or client-side assets (images, music, etc)
 Controllers, has the controllers :)
-The font folder which should be moved unter the Content folder
+The font folder which should be moved under the Content folder
 Models for the domain classes
 Scripts for JS files
 Views, contains folders named after controllers of the application and Shared that contains views
-	that can be used accross the controller
+	that can be used across the controller
 favicon.ico is the icon displayed  in the browser
 Global.asax, always in an ASP.NET file, called when the application starts dictates the Routes to use and
 	other notables
-packages.config, used by NuGet package manager and dependancies and libraries. Ex: install-package <name>
+packages.config, used by NuGet package manager and dependencies and libraries. Ex: install-package <name>
 Web.config -> contains all the nitty gritty, sections that should be modified are connectionStrings (for 
 	databases. and appSettings where we can define the configurations settings for the application
 
@@ -55,9 +55,9 @@ Next with the sufficient fields involved, we can now add a Controller
 	We do this by right-clicking the Controller folder and Selecting Controller
 	 we are then presented with common scaffold files that come with the typical calls needed 
 		the exercise determined that (empty would suffice). 
-			Within this controller, we can set the ActionResult to whatever url extention (action)
+			Within this controller, we can set the ActionResult to whatever url extension (action)
 			that we intend to use the model for. Make sure to include the model up where the 
-			dependancies are situated, I.e "using <ProjectName>.Models"
+			dependencies are situated, I.e "using <ProjectName>.Models"
 Note: When you generate a model, the View of the same name is also created here
 	since we've described what the view would be called via the method outlined in the controller.
 	we can set the view to that particular name within the model. (i.e controller Random() -> Random.cshtml)

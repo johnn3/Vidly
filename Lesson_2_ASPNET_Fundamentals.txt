@@ -1,0 +1,39 @@
+Recall that from the previous section, we left off with assigning an action
+result with regards to the movie controller in which we assigned the movie
+model with a random title and had it display on the Movie\Random screen. 
+
+We did this by passing the movie model through the controller to the view.
+
+	an alternate method of instead through returning the View(movie);, it can
+	just be done through:
+							return ViewResult();
+	method which is inherent to asp.net MVC.
+
+A question you should be asking now is why the function which is asking for an
+ActionResult datatype to be returned is actually just a View? Well, we can
+actually just have the method return a ViewResult instead (as good practice)
+and for unit testing.
+	-> which saves the task of casting compiling
+	a ViewResult as an ActionResult too.
+
+A quick nomenclature setup is as follows:
+Type					HelperMethod
+ViewResult				View()
+PartialViewResult		PartialView() ->parts of a view
+ContentResult			Content() ->like text
+									ex return("Hello");
+									just has Hello on the page, no styling
+RedirectResult			Redirect() -> to a different URL
+RedirectToRouteResult	RedirectToAction() -> Redirect to action instead of URL
+									ex: return RedirectToAction("Index", "Home",
+												new{page = 1, sortBy = "name"});
+											Index action from the Home Controller
+											with an anonymous object.
+											This anon object is returned in url
+											query string.
+JsonResult				Json() ->Serialized Json Object
+FileResult				File()
+HttpNotFoundResult		HttpNotFound() -> Not Found or 404 error
+EmptyResult				Action doesn't need to return anything -> like void
+							this one needs a return new EmptyResult();
+
