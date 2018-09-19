@@ -37,3 +37,48 @@ HttpNotFoundResult		HttpNotFound() -> Not Found or 404 error
 EmptyResult				Action doesn't need to return anything -> like void
 							this one needs a return new EmptyResult();
 
+///////////////////////////////
+
+within the movie controller, we can create a queryable string entry
+		//GET: Movies/Edit/id
+		//displays id = "id" on the new screen
+		//can also query string this now via edit?id=1
+		public ActionResult Edit(int id)
+		{
+			return Content("id=" + id);
+		}
+
+But what if we had changed the passed in variable not as "id" but as "movieId"?
+we will get an error because this was not explicitly set to movieId
+	to change this, we go to the routeConfig.cs file and observe the url: in the routes.MapRoute setting
+		this says "id"
+
+///////////////////////////////////
+
+        //in this call, we can request all movies in the database
+        //defaults to page 1 if no index is passed)
+        //if no sortBy is passed through, then we sort by the movies by 
+        //their name automatically
+        //to make a parameter optional, we must first make it nullable
+        //this is implied via a "?" beside the datatype
+        //string types are a reference type in C# and are therefore nullable automatically
+        public ActionResult Index(int? pageIndex, string sortBy)
+        {
+            if (!pageIndex.HasValue)
+                pageIndex = 1;
+
+            if (String.IsNullOrWhiteSpace(sortBy))
+                sortBy = "Name";
+
+            //for the purpose of this demo
+            return Content(String.Format("pageIndex={0} sortby={1}", pageIndex, sortBy));
+        }
+    }
+
+	Note: we can override this parameter by querying movies?pageIndex=2&sortby=Title
+			in which, after the page reference, we can string and set the parameters after '?'
+			setting them by declaring values through '=' and chaining through '&'
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+
+Custom Routes
